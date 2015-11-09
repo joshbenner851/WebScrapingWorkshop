@@ -1,4 +1,4 @@
-# WebScrapingWorkshop
+# Web Scraping Workshop
 
 
 The slides are at: https://goo.gl/4fKFpn
