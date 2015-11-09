@@ -1,18 +1,9 @@
 # WebScrapingWorkshop
 
 
+The slides are at: https://goo.gl/4fKFpn
 
-
-import urllib.request
-import urllib.parse
-from bs4 import BeautifulSoup
-
-#url of the site we're scraping
-url = "https://eatatstate.com/menus/brody"
-req = urllib.request.Request(url, None,headers={'User-Agent' : 'Mozilla/5.0'})
-html = urllib.request.urlopen(req)
-#Creating the BeautifulSoup object
-soup = BeautifulSoup(html)
+Throughout this workshop there are versions 1-3 and the finished version above in the .py files that you can copy and paste if you fall behind.
 
 
 
