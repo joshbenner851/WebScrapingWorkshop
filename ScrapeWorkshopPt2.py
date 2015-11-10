@@ -7,14 +7,14 @@ import time
 url = "https://eatatstate.com/menus/brody"
 req = urllib.request.Request(url, None,headers={'User-Agent' : 'Mozilla/5.0'})
 html = urllib.request.urlopen(req)
-
+soup = BeautifulSoup(html)
 
 #grabs all the view-content tags, we want the first one
 viewContent = soup.find_all("div", class_="view-content")[1]
 print(viewContent)
 #each dining place is in a table, so lets iterate over those
 for tables in viewContent.contents:
-    #print(tables)
+    #3print(tables)
 	#if the table isn't empty and isn't a new line character
     if tables and tables != '\n':
     	#scraping is weird and inserts new line characters into lists
@@ -42,5 +42,6 @@ for tables in viewContent.contents:
                             if food != " ":
                                 #prints each field items
                                 #print(food.text)
+                                x = 4
         print()
         print()
