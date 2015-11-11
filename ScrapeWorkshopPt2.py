@@ -11,10 +11,10 @@ soup = BeautifulSoup(html)
 
 #grabs all the view-content tags, we want the first one
 viewContent = soup.find_all("div", class_="view-content")[1]
-print(viewContent)
+#print(viewContent)
 #each dining place is in a table, so lets iterate over those
 for tables in viewContent.contents:
-    #3print(tables)
+    #print(tables)
 	#if the table isn't empty and isn't a new line character
     if tables and tables != '\n':
     	#scraping is weird and inserts new line characters into lists
@@ -29,7 +29,7 @@ for tables in viewContent.contents:
         for value in menuValue:
         	#filter again
             itemLst = [x for x in value.contents if x != '\n']
-            #print(itemLst)
+            #sprint(itemLst)
             #for every item in the food values
             for item in itemLst:
             	#filter list
@@ -41,7 +41,7 @@ for tables in viewContent.contents:
                         if('\n' not in food):
                             if food != " ":
                                 #prints each field items
-                                #print(food.text)
-                                x = 4
+                                print(food.text)
+                                
         print()
         print()

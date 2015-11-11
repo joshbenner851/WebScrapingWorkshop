@@ -7,6 +7,7 @@ import time
 url = "https://eatatstate.com/menus/brody"
 req = urllib.request.Request(url, None,headers={'User-Agent' : 'Mozilla/5.0'})
 html = urllib.request.urlopen(req)
+soup = BeautifulSoup(html)
 
 
 #grabs all the view-content tags, we want the first one
