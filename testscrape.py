@@ -5,13 +5,14 @@ import time
 
 def grabFoodPage(date):
     #paginating
-    for x in range(0,1):
+    for x in range(0,2):
         # change brody to case, etc
-        url = "https://eatatstate.com/menus/brody/2015-11-" + str(x+date)
+        url = "https://eatatstate.com/menus/case/2015-11-" + str(x+date)
         soup = grabPage(url)
         name = soup.find("div", class_="date-heading").text
         print("The menu for " + str(name))
         grabDaysFood(soup)
+        #time.sleep(5)
 
 def grabPage(url):
     req = urllib.request.Request(url, None,headers={'User-Agent' : 'Mozilla/5.0'})
