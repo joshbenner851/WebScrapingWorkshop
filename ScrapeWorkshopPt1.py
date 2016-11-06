@@ -15,14 +15,13 @@ soup = BeautifulSoup(html)
 #print(soup.find_all('a'))
 
 date = soup.find_all('div',class_="date-heading")
-print(date)
-#viewContent = soup.find_all("div",class_="view-content")[1]
+viewContent = soup.find_all("div",class_="view-content")[1]
 
-# for tables in viewContent.contents:
-# 	if tables and tables != "/n":
-# 	    body = tables.contents[5]
-# 	    oddView = [x for x in body.contents if x!='\n']
-# 	    print(oddView)
+for tables in viewContent.contents:
+	if tables and tables != "/n":
+	    body = tables.contents[5]
+	    oddView = [x for x in body.contents if x!='\n']
+	    print(oddView)
 
 
 

@@ -12,7 +12,7 @@ def grabFoodPage(date):
         name = soup.find("div", class_="date-heading").text
         print("The menu for " + str(name))
         grabDaysFood(soup)
-        #time.sleep(5)
+        time.sleep(5)
 
 def grabPage(url):
     req = urllib.request.Request(url, None,headers={'User-Agent' : 'Mozilla/5.0'})
