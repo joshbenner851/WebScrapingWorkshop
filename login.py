@@ -78,11 +78,12 @@ class LinkedInParser(object):
         """
         soup = self.loadSoup("https://www.linkedin.com/")
 #        csrf = "df134269-02ba-4db0-814a-d358bddccdd9"
-        #csrf = soup.find(id="loginCsrfParam-login")['value']
+        csrf = soup.find(id="loginCsrfParam-login")['value']
+        print(csrf)
         login_data = urllib.parse.urlencode({
             'session_key': self.login,
             'session_password': self.password,
-            'loginCsrfParam': "efc748d7-5fb4-496a-852d-bf421111ad5b",
+            'loginCsrfParam': csrf,
         }).encode('utf8')
 
         self.loadPage("https://www.linkedin.com/uas/login-submit", login_data)
