@@ -22,6 +22,7 @@ lunch = {}
 breakfast = {}
 dinner = {}
 latenight = {}
+allMeals = {}
 
 def addToMeals(soup,cafe):
     #grabs all the view-content tags, we want the first one
@@ -60,10 +61,15 @@ def addToMeals(soup,cafe):
                                     #print(food.text)
                                     if(counter == 0):
                                         breakfast[food.text] = [cafe]
+                                        allMeals[food.text] = [cafe,"breakfast"]
                                     elif(counter == 1):
                                         lunch[food.text] = [cafe]
+                                        allMeals[food.text] = [cafe,"lunch"]
+
                                     elif(counter == 2):
                                         dinner[food.text] = [cafe]
+                                        allMeals[food.text] = [cafe,"dinner"]
+
                                     else:
                                         latenight[food.text] = [cafe]
 
@@ -73,11 +79,16 @@ def addToMeals(soup,cafe):
             print()
             print()
 
+def whereIsMyFavorite(name):
+    print("Your favorite meal is at ", allMeals[name][0] , " for ", allMeals[name][1] )
+
 def main():
     soupForCafe()
     print("breakfast: ", breakfast)
 
 main()
+print()
+whereIsMyFavorite("Grilled Chicken")
 #print("lunch: ", lunch)
 #print("dinner: ", dinner)
 
