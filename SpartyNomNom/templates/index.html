@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpartyNomNom</title>
+</head>
+<body>
+<form action="{{ url_for('user') }}" method="POST">
+    <label>Enter in your favorite meals</label>
+    <input type="text" name="meals" value="{{ saves.get('meals', '')}}">
+    <input type="submit" value="Let's eat">
+</form>
+<p>This is a template: {{saves.get('places','')}}</p>
+</body>
+</html>
