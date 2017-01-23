@@ -17,6 +17,7 @@ class LinkedInParser(object):
         self.login = login
         self.password = keys.password
 
+
         # Simulate browser with cookies enabled
         self.cj = cookielib.MozillaCookieJar(cookie_filename)
         if os.access(cookie_filename, os.F_OK):
@@ -82,6 +83,14 @@ class LinkedInParser(object):
             'session_key': self.login,
             'session_password': self.password,
             'loginCsrfParam': "efc748d7-5fb4-496a-852d-bf421111ad5b",
+
+        csrf = soup.find(id="loginCsrfParam-login")['value']
+        print(csrf)
+        login_data = urllib.parse.urlencode({
+            'session_key': self.login,
+            'session_password': self.password,
+            'loginCsrfParam': csrf,
+
         }).encode('utf8')
 
         self.loadPage("https://www.linkedin.com/uas/login-submit", login_data)
@@ -95,7 +104,11 @@ class LinkedInParser(object):
         users = 0
         '''for x in range(0,10):
             soup = self.loadSoup("https://www.linkedin.com//manageGroupMembers?dispParts=&gid=1946872&memberLevel=MEMBER&sort=lna&split_page=" + str(x))
+<<<<<<< HEAD
             #grabbing all the prole links of users, still need to grab their public
+=======
+            #grabbing all the prole links of users, still need to grab their public 
+>>>>>>> origin/SpartyCafeApp
             print(soup.find("title"))
             for a in soup.find_all('a', href=True):
                 if(("https://www.linkedin.com/profile/view?id=" in a['href']) and ("mem_prof" in a['href'])):
