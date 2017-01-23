@@ -35,3 +35,4 @@ viewContent = soup.find_all("div",class_="view-content")[1]
 
 
 
+
