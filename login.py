@@ -82,7 +82,7 @@ class LinkedInParser(object):
         login_data = urllib.parse.urlencode({
             'session_key': self.login,
             'session_password': self.password,
-            'loginCsrfParam': "efc748d7-5fb4-496a-852d-bf421111ad5b",
+            'loginCsrfParam': "efc748d7-5fb4-496a-852d-bf421111ad5b"})
 
         csrf = soup.find(id="loginCsrfParam-login")['value']
         print(csrf)
