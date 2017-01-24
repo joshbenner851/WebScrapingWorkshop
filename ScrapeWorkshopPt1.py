@@ -4,26 +4,32 @@ from bs4 import BeautifulSoup
 
 
 url = "https://eatatstate.com/menus/brody"
-req = urllib.request.Request(url, None,headers={'User-Agent' : 'Mozilla/5.0'})
+req = urllib.request.Request(url, None, headers={'User-Agent' : 'Mozilla/5.0'})
 html = urllib.request.urlopen(req)
-soup = BeautifulSoup(html)
+soup = BeautifulSoup(html, "html.parser")
 
 # grabs page title
-# print(soup.title)
+print("title: ", soup.title)
 
 # grabs first paragraph
-# print(soup.p)
+print("paragraph: ", soup.p)
 
 # grabs first anchor tag(link)
-# print(soup.a)
+print("anchor tag: ", soup.a)
 
 # grabs all anchor(link tags) -> extremely useful to grab all the links on a page
-# print(soup.find_all('a'))
+print("all links: ", soup.find_all('a'))
 
 
-date = soup.find_all('div',class_="date-heading")
-#
-viewContent = soup.find_all("div",class_="view-content")[1]
+date = soup.find_all('div', class_="date-heading")
+print("data: ", date)
+
+print()
+print()
+print()
+
+viewContent = soup.find_all("div", class_="view-content")[1]
+print(viewContent)
 
 # for tables in viewContent.contents:
 # 	if tables and tables != "/n":
