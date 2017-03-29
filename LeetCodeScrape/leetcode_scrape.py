@@ -1,5 +1,3 @@
-
-
 import urllib.request
 import urllib.parse
 from bs4 import BeautifulSoup
@@ -9,13 +7,11 @@ from random import randint
 import json
 # Importing Twilio so we can text our phone
 from twilio.rest import TwilioRestClient
+import keys
 
 questions_dict = {}
 questions_lst = []
 filename = "questions.json"
-
-ACCOUNT_SID = "ACed9656eb23b8b6f22bc0070e0bc73f99"
-AUTH_TOKEN = "9c683e2d527a4617576fa4000e5c8339"
 
 
 class Question:
@@ -33,8 +29,8 @@ def text_message(msg):
     :return:
     '''
     # Find these values at https://twilio.com/user/account
-    account_sid = ACCOUNT_SID
-    auth_token = AUTH_TOKEN
+    account_sid = keys.ACCOUNT_SID
+    auth_token = keys.AUTH_TOKEN
     client = TwilioRestClient(account_sid, auth_token)
     message = client.messages.create(to="(616) 238-3511", from_="(616) 920-6564",
                                  body=msg)
@@ -158,8 +154,9 @@ def main():
     write_to_json(filename, questions_lst)
 
 
-# main()
-open_questions()
+main()
+#open_questions()
+
 
 
 
