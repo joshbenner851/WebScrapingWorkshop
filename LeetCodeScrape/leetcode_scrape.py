@@ -26,7 +26,7 @@ class Question:
         self.difficulty = difficulty
 
 
-def textMessage(msg):
+def text_message(msg):
     '''
     Twilio function to text our phone
     :param msg: Message we're texting to our phone
@@ -39,22 +39,20 @@ def textMessage(msg):
     message = client.messages.create(to="(616) 238-3511", from_="(616) 920-6564",
                                  body=msg)
 
+
 def grab_questions():
     """
     GET Request to grab all the questions name's and difficulty
     :return:
     """
     counter = 1
-    # try:
     url = "https://leetcode.com/api/problems/algorithms/"
     headers_dict = {'User-Agent': 'Mozilla/5.0', "Cookie": "__atuvc=4%7C11; csrftoken=io8BL2v2XklVEwRvQWvTnKGkF9eTjEj4VQxdZMZEMwwEiQTWATCwMid9SLIUtPYi; _ga=GA1.2.782661392.1489609798; _gat=1","Content-Type":"application/json","Accept-Encoding":"gzip, deflate, sdch, br"}
     response = requests.get(url, headers=headers_dict)
     sleep_random_time()
     questions = response.json()["stat_status_pairs"]
-    print("q: ", questions)
-    #questions = open_questions()
+    # questions = open_questions()
     # for all the questions, grab their info
-    # for question in questions:
     for question in questions:
         # Only do the questions not behind the pay wall
         if(not question['paid_only']):
@@ -64,19 +62,21 @@ def grab_questions():
             # print("title: ", title)
             questions_dict[title] = Question(title, difficulty)
             counter += 1
-    # except Exception as e:
-    #     print("error")
-    #     textMessage(str("Error on: " + str(counter) + " \n" + "Error msg: " +str(e)))
+
 
 def open_questions():
+    """
+    Opens the questions.json instead of hitting their API everytime
+    :return: The list of Question objects
+    """
     data = []  # List of Record objects
 
     with open("questions.json") as json_data:
         json_obj = json.load(json_data)
         for d in json_obj:
             data.append(d)
-    print("len: ", len(data))
-    #return data
+    return data
+
 
 def sleep_random_time():
     """
@@ -86,7 +86,7 @@ def sleep_random_time():
     # get a random number of time to sleep
     sleep_time = randint(3, 9)
     # sleep a random amount of time to prevent getting rate blocked
-    #time.sleep(sleep_time)
+    time.sleep(sleep_time)
 
 
 def grab_problem(question):
@@ -111,17 +111,27 @@ def grab_problem(question):
         # print("desc: ", question.description)
         print("tags: ", question.tags)
     except Exception as e:
-        textMessage("Error in grab problems ")
-        textMessage("Error on: " + question.title + " \n" + "Error msg: " + e)
+        text_message("Error in grab problems ")
+        text_message("Error on: " + question.title + " \n" + "Error msg: " + e)
 
 
 def write_to_json(filename, data):
+    """
+    Writes the question objects to JSON
+    :param filename: file we're writing to
+    :param data: List of Question Objects
+    :return: none
+    """
     with open(filename, 'w') as outfile:
         # print("data: ", data)
         json.dump(data, outfile)
 
 
 def build_problems():
+    """
+    Adds the questions tags and description to each question object
+    :return: if there was a failure in the script
+    """
     failed = False
     # Loop through the question objects
     for question in questions_dict.values():
@@ -134,8 +144,7 @@ def build_problems():
             sleep_random_time()
         except Exception as e:
             failed = True
-            textMessage("Error in build problems ")
-            textMessage("Error on: " + question.title + " \n" + "Error msg: " + e)
+            text_message("Error on: " + question.title + " \n" + "Error msg: " + e)
     return failed
 
 
@@ -143,7 +152,7 @@ def main():
     grab_questions()
     did_fail = build_problems()
     if(not did_fail):
-        textMessage("Script successfully ran")
+        text_message("Script successfully ran")
     # print("questions list: ", questions_lst)
     # Write the questions to json
     write_to_json(filename, questions_lst)
